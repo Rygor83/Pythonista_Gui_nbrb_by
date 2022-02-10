@@ -172,6 +172,9 @@ class MyClass(ui.View):
 		response = requests.get(f'https://www.nbrb.by/api/exrates/rates?ondate={ rep_date }&periodicity=0')
 		cur_list = json.loads(response.content)
 		
+		# замена запятой на точку
+		self.amnt_from = self.amnt_from.replace(',','.')
+		
 		if self.cur_from != 'BYN':
 			cur_from_info = list(filter(lambda person: person['Cur_Abbreviation'] == self.cur_from , cur_list))
 		else:
